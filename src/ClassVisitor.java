@@ -8,8 +8,8 @@ public class ClassVisitor extends  VoidVisitorAdapter {
 		 String name=n.getName();
 		 //System.out.println("Size of class being extended is "+n.getExtends().size());
 		 Data.classExtendsList=n.getExtends();
-		 if(Data.classExtendsList==null)
-			 System.out.println("It is nulll");
+		// if(Data.classExtendsList==null)
+			// System.out.println("It is nulll");
 		 int len;
 		 int i=0;
 		 if(Data.classExtendsList!=null)
@@ -35,8 +35,8 @@ public class ClassVisitor extends  VoidVisitorAdapter {
 				 Data.relationships.append(Data.classImplementsList.get(i).getName()+" ^-.- "+name+"\n");
 			 }
 		 }
-		 System.out.println("relation ships here below");
-		 System.out.println(Data.relationships);
+		 //System.out.println("relation ships here below");
+		 //System.out.println(Data.relationships);
 		 if(n.isInterface())
 		 {
 			 Data.InterfaceList.add(name);
@@ -48,11 +48,12 @@ public class ClassVisitor extends  VoidVisitorAdapter {
 		 }
 		 Data.classList.add(name);	
      	Data.relationship_backup =name;
-     	
+     	System.out.println("Calling variable visitor.........");
      	new VariableVisitor().visit(n, null);
+     	
     	
     	//to list all the methods inside the class
-        new MethodVisitor().visit(n, null); 
+       // new MethodVisitor().visit(n, null); 
         
         
         Data.plant_input.append("}\n");
