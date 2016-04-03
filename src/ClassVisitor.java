@@ -191,10 +191,10 @@ public class ClassVisitor extends  VoidVisitorAdapter {
 	        	if(ModifierSet.isPublic(modifiers)){
         			Data.plant_input.append("+");
             	}
-	        	if(ModifierSet.isProtected(modifiers)){
+	        	/*if(ModifierSet.isProtected(modifiers)){
         			Data.plant_input.append("#");
             	}
-        		
+        		*/
 	        	else if(modifiers==0)
         		{
         			

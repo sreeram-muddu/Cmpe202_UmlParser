@@ -16,7 +16,7 @@ import net.sourceforge.plantuml.SourceStringReader;
 
 
 
-public class Uml {
+public class Umlparser {
 	
 	
 	public static void getset()
