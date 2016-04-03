@@ -136,14 +136,16 @@ public class ClassVisitor extends  VoidVisitorAdapter {
 	        	System.out.println("Second visit method in MethodVisitor");
 	        	String method_name=n.getName();
 		        int modifiers=n.getModifiers();
-		        if(ModifierSet.isPrivate(modifiers)){
-	        		Data.plant_input.append("-");
+		       if(ModifierSet.isPrivate(modifiers)){
+	        	   return;
+		    	   //Data.plant_input.append("-");
 	        	}
 	        	if(ModifierSet.isPublic(modifiers)){
 	    			Data.plant_input.append("+");
 	        	}
-	            if(ModifierSet.isProtected(modifiers)){
-	    			Data.plant_input.append("#");
+	          if(ModifierSet.isProtected(modifiers)){
+	        	  	return;
+	    			//Data.plant_input.append("#");
 	        	}
 		        Data.plant_input.append(n.getName().toString());
 		        List<Parameter> p = n.getParameters();
@@ -191,10 +193,11 @@ public class ClassVisitor extends  VoidVisitorAdapter {
 	        	if(ModifierSet.isPublic(modifiers)){
         			Data.plant_input.append("+");
             	}
-	        	/*if(ModifierSet.isProtected(modifiers)){
-        			Data.plant_input.append("#");
+	        	if(ModifierSet.isProtected(modifiers)){
+        			return;
+	        		//Data.plant_input.append("#");
             	}
-        		*/
+        		
 	        	else if(modifiers==0)
         		{
         			

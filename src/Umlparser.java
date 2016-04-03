@@ -26,6 +26,7 @@ public class Umlparser {
 	for(i=0;i<len;i++)
 		{
 			String variable= Data.variableList.get(i).toString();
+			//getting getters and setters.
 			String getComp="get"+variable;	
 			int get_index= Data.methodList.indexOf(getComp);
 			String setComp="set"+variable;
