@@ -72,6 +72,11 @@ public class Uml {
 				    {
 				    	Data.associations.append(tokens[0]+"]\"*\" -- \"*\"["+tokens[1]+"\n");
 				    }
+				    String s=tokens[0]+" -- "+tokens[1]+"\n";
+				    if(Data.associations.indexOf(s)!=-1)
+				    {
+				    	Data.associations.replace(Data.associations.indexOf(s),Data.associations.indexOf(s)+s.length(), "");
+				    }
 			  	}
 			  else
 			  {
@@ -90,7 +95,7 @@ public class Uml {
 				  }
 				
 				  String s=tokens[0]+" -- "+tokens[1]+"\n";
-				  if(Data.associations.indexOf(tokens[0]+" -- "+tokens[1]+"\n")!=-1){
+				  if(Data.associations.indexOf(s)!=-1){
 					  Data.associations.replace(Data.associations.indexOf(s), Data.associations.indexOf(s)+s.length(), "");
 				  }
 			  }
@@ -105,7 +110,7 @@ public class Uml {
 	
 	public static void association()
 		{
-			Iterator it=Data.variableList.iterator();
+			Iterator it=Data.varTypeList.iterator();
 			String match=null,match_first,match_second,ass="";
 			
 			while(it.hasNext())
@@ -114,10 +119,10 @@ public class Uml {
 				if(Data.classList.indexOf(match)!=-1)
 				{
 					List<Integer>indexes=new ArrayList<Integer>();
-					int i=0,len=indexes.size();
+					int i=0,len=Data.varTypeList.size();
 					for(;i<len;i++)
 					{
-						if(Data.variableList.get(i)==match)
+						if(Data.varTypeList.get(i)==match)
 							{
 								indexes.add(i);
 							}
@@ -127,8 +132,8 @@ public class Uml {
 					len=indexes.size();
 					for(i=0;i<len;i++)
 					{
-						match_first=Data.variableList.get(indexes.get(i)).toString();
-						match_second=Data.variableList.get(indexes.get(i)).toString();
+						match_first=Data.varTypeList.get(indexes.get(i)).toString();
+						match_second=Data.classVarList.get(indexes.get(i)).toString();
 					    if(Data.InterfaceList.contains(match_first)&& !Data.InterfaceList.contains(match_second))
 					    {
 					    	ass = match_second+"\"uses\" -.-> "+match_first+"\n";

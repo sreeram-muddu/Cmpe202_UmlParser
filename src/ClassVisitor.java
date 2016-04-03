@@ -71,6 +71,10 @@ public class ClassVisitor extends  VoidVisitorAdapter {
      	new MethodVisitor().visit(n, null); 
         //System.out.println("done with variable visitor");
         Data.plant_input.append("}\n");
+        System.out.println("At end of Class visitor ");
+        System.out.println("---------------------------------------------------------------------");
+    	System.out.println("plant input is "+Data.plant_input);
+    	System.out.println("---------------------------------------------------------------------");
 	 }
 	    static class MethodVisitor extends VoidVisitorAdapter<Object> {
 	        private static String methodName = "";
@@ -85,10 +89,10 @@ public class ClassVisitor extends  VoidVisitorAdapter {
 	        if(ModifierSet.isPrivate(modifiers)){
         		Data.plant_input.append("-");
         	}
-        	else if(ModifierSet.isPublic(modifiers)){
+        	if(ModifierSet.isPublic(modifiers)){
     			Data.plant_input.append("+");
         	}
-        	else if(ModifierSet.isProtected(modifiers)){
+        	if(ModifierSet.isProtected(modifiers)){
     			Data.plant_input.append("#");
         	}
 	        Data.plant_input.append(n.getName().toString());
@@ -102,7 +106,7 @@ public class ClassVisitor extends  VoidVisitorAdapter {
 	        {
 	        	
 	        Parameter param=p.get(i);
-	        Data.plant_input.append(param.getId().toString()+":"+param.getType().toString());
+	        Data.plant_input.append(param.getId().toString()+" : "+param.getType().toString());
 	        	Data.classVarList.add(Data.relationship_backup);
 	        	Data.varTypeList.add(param.getType().toString());
 	        	Data.constructorList.add(Data.relationship_backup+":"+param.getType().toString());
@@ -116,7 +120,12 @@ public class ClassVisitor extends  VoidVisitorAdapter {
 	        	Data.plant_input.append("()");
 	      /*  if(p==null)
 	        	 Data.plant_input.append("()\n");*/
-	        Data.plant_input.append("\n");
+	        
+	        System.out.println("At end of Constructor  visitor ");
+	        System.out.println("---------------------------------------------------------------------");
+        	System.out.println("plant input is "+Data.plant_input);
+        	System.out.println("---------------------------------------------------------------------");
+        	Data.plant_input.append("\n");
 	        }
 	        
 	        
@@ -130,10 +139,10 @@ public class ClassVisitor extends  VoidVisitorAdapter {
 		        if(ModifierSet.isPrivate(modifiers)){
 	        		Data.plant_input.append("-");
 	        	}
-	        	else if(ModifierSet.isPublic(modifiers)){
+	        	if(ModifierSet.isPublic(modifiers)){
 	    			Data.plant_input.append("+");
 	        	}
-	        	else if(ModifierSet.isProtected(modifiers)){
+	            if(ModifierSet.isProtected(modifiers)){
 	    			Data.plant_input.append("#");
 	        	}
 		        Data.plant_input.append(n.getName().toString());
@@ -146,21 +155,27 @@ public class ClassVisitor extends  VoidVisitorAdapter {
 		        while(i<len)
 		        {
 		        	Parameter param=p.get(i);
-		        	   Data.plant_input.append(param.getId().toString()+":"+param.getType().toString());
+		        	   Data.plant_input.append(param.getId().toString()+" : "+param.getType().toString());
 			        	Data.classVarList.add(Data.relationship_backup);
 			        	Data.varTypeList.add(param.getType().toString());
-			        	Data.methodList.add(Data.relationship_backup+":"+param.getType().toString());
+			        	//Data.methodList.add(Data.relationship_backup+":"+param.getType().toString());
 		         i=i+1;       	
 		        }
-		        Data.plant_input.append(")\n");
+		        Data.plant_input.append(")");
 		        
 		        }
-		        System.out.println("At end of second Method visitor");
-		        if(p!=null)
-		        	Data.plant_input.append("()\n");
+		        else
+		        	Data.plant_input.append("()");
+		        
+		        System.out.println("At end of second Method visitor 2");
+		        
+		        	
 		        Data.plant_input.append(" : "+ n.getType()+"\n");
 	        	Data.methodsList.add(n.getName().toLowerCase()+":"+Data.relationship_backup);
-	        	Data.methodList.add(n.getName()+":"+Data.relationship_backup);
+	        	Data.methodList.add(n.getName().toString()+":"+Data.relationship_backup);
+	        	System.out.println("---------------------------------------------------------------------");
+	        	System.out.println("plant input is "+Data.plant_input);
+	        	System.out.println("---------------------------------------------------------------------");
 	        }
 
 	    }
@@ -173,11 +188,14 @@ public class ClassVisitor extends  VoidVisitorAdapter {
 	        	if(ModifierSet.isPrivate(modifiers)){
             		Data.plant_input.append("-");
             	}
-	        	else if(ModifierSet.isPublic(modifiers)){
+	        	if(ModifierSet.isPublic(modifiers)){
         			Data.plant_input.append("+");
             	}
+	        	if(ModifierSet.isProtected(modifiers)){
+        			Data.plant_input.append("#");
+            	}
         		
-        		else if(modifiers==0)
+	        	else if(modifiers==0)
         		{
         			
         		}
@@ -191,15 +209,16 @@ public class ClassVisitor extends  VoidVisitorAdapter {
         				
         	    	 VariableDeclarator v=i.next();
         	    	 
-        	    	 	Data.plant_input.append(v.getId());
+        	    	 	Data.plant_input.append(v.getId().toString());
         	    	 	Data.variableList.add(v.getId().toString()+" : "+Data.relationship_backup);
-        				if(data_type.startsWith("Collection")){
+        				if(data_type.startsWith("Collection<")){
         				Data.collectionList.add(data_type.substring(11,data_type.length()-1)+":"+Data.relationship_backup);
         				Data.plant_input.delete(Data.plant_input.length()-(v.getId().toString().length())-1, Data.plant_input.length());
         				}
         				else if(data_type.equalsIgnoreCase(v.getId().toString())){
         					Data.plant_input.delete(Data.plant_input.length()-(v.getId().toString().length())-1, Data.plant_input.length());
         				}
+        				else
         				Data.plant_input.append(" : "+data_type+"\n");
         			}
         	     Data.classVarList.add(Data.relationship_backup);
@@ -209,7 +228,10 @@ public class ClassVisitor extends  VoidVisitorAdapter {
         			
         			
         		}
-        		
+	        	System.out.println("At end of variable visitor ");
+	        	System.out.println("---------------------------------------------------------------------");
+	        	System.out.println("plant input is "+Data.plant_input);
+	        	System.out.println("---------------------------------------------------------------------");
 	        }
 	
 	    }
